@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "==2.20.1"
+aiohttp = "==3.6.2"
+websocket-client = "==0.57.0"
+APScheduler = "==3.6.3"
+huobi-client = {path = "."}
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
