@@ -38,7 +38,7 @@ class WebSocketReqClient(object):
         request.subscription_handler = subscription_handler
         request.is_trading = is_trade
         request.is_mbp_feed = is_mbp_feed
-        request.auto_close = True  # for websocket request, auto close the connection after request.
+        request.auto_close = False  # for websocket request, auto close the connection after request.
         request.json_parser = parse
         request.update_callback = callback
         request.error_handler = error_handler
