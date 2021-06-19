@@ -22,7 +22,11 @@ class ReqCandleStickService:
             increment_level = {
                 CandlestickInterval.MIN1: 0.5,
                 CandlestickInterval.MIN5: 1,
-                CandlestickInterval.MIN15: 2
+                CandlestickInterval.MIN15: 2,
+                CandlestickInterval.MIN30: 4,
+                CandlestickInterval.MIN60: 8,
+                CandlestickInterval.HOUR4: 32,
+                CandlestickInterval.DAY1: 360
             }
 
             for symbol in symbol_list:
