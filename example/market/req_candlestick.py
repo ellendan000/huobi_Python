@@ -9,8 +9,5 @@ def error(e: 'HuobiApiException'):
     print(e.error_code + e.error_message)
 
 sub_client = MarketClient(init_log=True)
-#sub_client.request_candlestick_event("btcusdt", CandlestickInterval.MIN1, callback, from_ts_second=None, end_ts_second=None, error_handler=None)
 sub_client.req_candlestick("htusdt", CandlestickInterval.MIN15, callback, from_ts_second=1620748800, end_ts_second=1620835200)
-#sub_client.request_candlestick_event("btcusdt", CandlestickInterval.MIN1, callback, from_ts_second=1569361140, end_ts_second=0)
-#sub_client.request_candlestick_event("btcusdt", CandlestickInterval.MIN1, callback, from_ts_second=1569379980)
 # sub_client.req_candlestick("btcusdt", CandlestickInterval.MIN1, callback)

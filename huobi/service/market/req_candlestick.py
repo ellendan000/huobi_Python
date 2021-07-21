@@ -30,22 +30,26 @@ class ReqCandleStickService:
             }
 
             for symbol in symbol_list:
-                increment = timedelta(days=increment_level[interval])
-                _cursor_from = from_ts_second
-                _next_day = datetime.timestamp(datetime.fromtimestamp(from_ts_second) + increment)
-                _cursor_to = _next_day if _next_day < end_ts_second else end_ts_second
-
-                while _cursor_to and _cursor_to <= end_ts_second:
-                    print(f"==> [{symbol}]: {_cursor_from} - {_cursor_to}]")
-                    connection.send(request_kline_channel(symbol, interval, _cursor_from, _cursor_to))
-
-                    _cursor_from = _cursor_to
-                    if _cursor_from >= end_ts_second:
-                        break
-
-                    _next_day = datetime.timestamp(datetime.fromtimestamp(_cursor_from) + increment)
+                if from_ts_second != None:
+                    increment = timedelta(days=increment_level[interval])
+                    _cursor_from = from_ts_second
+                    _next_day = datetime.timestamp(datetime.fromtimestamp(from_ts_second) + increment)
                     _cursor_to = _next_day if _next_day < end_ts_second else end_ts_second
-                    time.sleep(0.5)
+
+                    while _cursor_to and _cursor_to <= end_ts_second:
+                        print(f"==> [{symbol}]: {_cursor_from} - {_cursor_to}]")
+                        connection.send(request_kline_channel(symbol, interval, _cursor_from, _cursor_to))
+
+                        _cursor_from = _cursor_to
+                        if _cursor_from >= end_ts_second:
+                            break
+
+                        _next_day = datetime.timestamp(datetime.fromtimestamp(_cursor_from) + increment)
+                        _cursor_to = _next_day if _next_day < end_ts_second else end_ts_second
+                        time.sleep(0.5)
+                else:
+                    connection.send(request_kline_channel(symbol, interval))
+                    time.sleep(0.01)
 
         def parse(dict_data):
             return default_parse(dict_data, CandlestickReq, Candlestick)
