@@ -1,5 +1,5 @@
 import time
-
+import logging
 from huobi.utils import *
 from huobi.constant import CandlestickInterval
 
@@ -7,6 +7,8 @@ from huobi.connection.websocket_req_client import *
 from huobi.model.market import *
 from huobi.utils.channels_request import *
 from datetime import datetime, timedelta
+
+logger = logging.getLogger("huobi-client")
 
 class ReqCandleStickService:
     def __init__(self, params):
@@ -37,7 +39,7 @@ class ReqCandleStickService:
                     _cursor_to = _next_day if _next_day < end_ts_second else end_ts_second
 
                     while _cursor_to and _cursor_to <= end_ts_second:
-                        print(f"==> [{symbol}]: {_cursor_from} - {_cursor_to}]")
+                        logger.info(f"==> send req for [{symbol}]: {_cursor_from} - {_cursor_to}]")
                         connection.send(request_kline_channel(symbol, interval, _cursor_from, _cursor_to))
 
                         _cursor_from = _cursor_to
