@@ -1,11 +1,11 @@
 import time
-
+import logging
 from huobi.utils import *
 
 from huobi.connection.subscribe_client import SubscribeClient
 from huobi.model.market import *
 
-
+logger = logging.getLogger("huobi-client")
 
 class SubCandleStickService:
     def __init__(self, params):
@@ -28,6 +28,7 @@ class SubCandleStickService:
                                             parse,
                                             callback,
                                             error_handler)
+        logger.info(f'websocket_manage connect for sub_candlestick [{symbol_list}, {interval}]')
 
 
 

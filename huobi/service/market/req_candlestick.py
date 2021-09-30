@@ -60,6 +60,7 @@ class ReqCandleStickService:
                                             parse,
                                             callback,
                                             error_handler)
+        logger.info(f'websocket_manage connect for req_candlestick [{symbol_list}, {interval}]')
 
 
 

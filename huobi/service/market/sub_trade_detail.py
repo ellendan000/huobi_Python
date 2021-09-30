@@ -1,9 +1,10 @@
 import time
-
+import logging
 from huobi.model.market import *
 from huobi.utils import *
 from huobi.connection.subscribe_client import SubscribeClient
 
+logger = logging.getLogger("huobi-client")
 
 class SubTradeDetailService:
     def __init__(self, params):
@@ -27,6 +28,7 @@ class SubTradeDetailService:
                                             parse,
                                             callback,
                                             error_handler)
+        logger.info(f'websocket_manage connect for sub_trade_detail [{symbol_list}]')
 
 
 
